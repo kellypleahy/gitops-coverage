@@ -22,19 +22,22 @@ projectPath.replace(/\/+$/, "");
 
 let outputFile = process.env["GITOPS_COVERAGE_OUTPUT_FILE"];
 
-try {
-  const mdComment = await mdcore.createMarkdownCore(projectPath, jsonSummaryFilePath, lcovInfoFilePath);
-  if (outputFile) {
-    fs.writeFile(outputFile, mdComment, err => {
-      if (err) {
-        throw err
-      } else {
-        console.log(`Successfully wrote gitops coverage markdown to ${outputFile}`);
-      }
-    });
-  } else {
-    console.log(mdComment);
+await new Promise((resolve, reject) => {
+  async function inner() {
+    const mdComment = await mdcore.createMarkdownCore(projectPath, jsonSummaryFilePath, lcovInfoFilePath);
+    if (outputFile) {
+      fs.writeFile(outputFile, mdComment, {}, err => {
+        if (err) {
+          reject(err);
+        } else {
+          console.log(`Successfully wrote gitops coverage markdown to ${outputFile}`);
+          resolve();
+        }
+      });
+    } else {
+      console.log(mdComment);
+      resolve();
+    }
   }
-} catch (error) {
-  console.error(error);
-}
+  return inner();
+});

@@ -11,6 +11,9 @@ inputs:
   lcov-info-file-path:
     description: 'LCOV info path (output file from IstanbulJS)'
     required: true
+  output-file-path:
+    description: 'File path for the output file on disk (md is hard to pass via output vars)'
+    required: true
 outputs:
   coverage:
     description: 'output markdown for the coverage result'
