@@ -8,7 +8,7 @@ try {
   const lcovInfoFilePath = core.getInput('lcov-info-file-path');
 
   let result = await mdcore.createMarkdownCore(projectPath, jsonSummaryFilePath, lcovInfoFilePath);
-  core.setOutput('markdown', result);
+  core.setOutput('coverage', result);
 } catch(error) {
   core.setFailed(error.message);
 }
