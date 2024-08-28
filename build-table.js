@@ -3,7 +3,7 @@ import { addColorToStats, RED } from "./add-color-to-stats.js";
 import { sumCoverage } from "./sum-coverage.js";
 
 export function buildTable(total, files, haveSummary) {
-  return buildTableDepth(total, files, 0)
+  return buildTableDepth(total, files, 0, haveSummary)
 }
 
 // Recursively builds the markdown table containing all code coverage statistics
