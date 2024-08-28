@@ -1,0 +1,19 @@
+name: 'Coverage to Markdown'
+description: 'Converts IstanbulJS coverage output to Markdown'
+inputs:
+  project-path:
+    description: 'Source base path (to remove from links)'
+    required: true
+    default: '/usr/src/app'
+  json-summary-file-path:
+    description: 'JSON summary path (output file from IstanbulJS)'
+    required: true
+  lcov-info-file-path:
+    description: 'LCOV info path (output file from IstanbulJS)'
+    required: true
+outputs:
+  coverage:
+    description: 'output markdown for the coverage result'
+runs:
+  using: 'node20'
+  main: 'index.js'
